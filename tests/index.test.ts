@@ -18,9 +18,9 @@ describe('Kristang Wordlist', () => {
   it('should return false for unknown words', () => {
     expect(hasWord('xyz123notaword')).toBe(false);
   });
-  
+
   it('should handle case insensitivity', () => {
-      // 'Aboh' vs 'aboh'
-      expect(hasWord('ABOH', true)).toBe(true);
+    // 'Aboh' vs 'aboh'
+    expect(hasWord('ABOH', true)).toBe(true);
   });
 });

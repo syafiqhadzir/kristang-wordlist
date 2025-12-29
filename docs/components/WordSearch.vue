@@ -19,7 +19,11 @@ const filteredWords = computed(() => {
       <p v-if="filteredWords.length === 0">No matches found.</p>
       <ul v-else>
         <li v-for="word in filteredWords" :key="word">{{ word }}</li>
-        <li v-if="words.filter(w => w.toLowerCase().includes(searchTerm.toLowerCase())).length > 50">...and more</li>
+        <li
+          v-if="words.filter((w) => w.toLowerCase().includes(searchTerm.toLowerCase())).length > 50"
+        >
+          ...and more
+        </li>
       </ul>
     </div>
   </div>
