@@ -1,29 +1,51 @@
-# Kristang (Malacca Creole Portuguese)
+# Kristang (Malacca Creole Portuguese) Wordlist
 
-<!-- References -->
+![CI](https://github.com/SyafiqHadzir/kristang-wordlist/workflows/CI/badge.svg)
+![License](https://img.shields.io/github/license/SyafiqHadzir/kristang-wordlist)
+
+A comprehensive wordlist for Kristang (Malacca Creole Portuguese).
+
+## Usage
+
+This wordlist is provided in [Hunspell](https://github.com/hunspell/hunspell) format. The main dictionary file is `mcm_MY.dic`.
+
+## Development
+
+This repository uses modern tooling to maintain the quality and integrity of the wordlist.
+
+### Prerequisites
+
+- Node.js (Lateat LTS recommended)
+- npm
+
+### Setup
+
+```bash
+npm install
+```
+
+### Scripts
+
+- `npm run sort`: Sorts the wordlist, removes duplicates, and updates the word count.
+- `npm run check-format`: Checks if files are formatted correctly.
+- `npm run format`: Formats all files using Prettier.
+
+### Formatting Rules
+
+We use a strict sorting order for the wordlist to ensure consistency. Please run `npm run sort` before committing any changes to the dictionary file.
+
 ## References
 
 * Pacific Linguistics Dictionary of Kristang
 
-<!-- LICENSE -->
 ## License
 
-    Copyright (C) 2023 Syafiq Hadzir
+Copyright (C) 2023 SyafiqHadzir
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+See the [LICENSE](LICENSE) file for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program. If not, see <https://www.gnu.org/licenses/>.
-
-<!-- CONTACT -->
 ## Contact
 
 Syafiq Hadzir - [@syafiqhadzir_](https://twitter.com/syafiqhadzir_) - inquiry@syafiqhadzir.dev

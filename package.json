@@ -1,19 +1,43 @@
 {
-    "name": "kristang-wordlist",
-    "version": "1.0.0",
-    "description": "Kristang wordlist. Released under GPLv3.",
-    "files": [
-        "mcm_MY.dic"
+  "name": "kristang-wordlist",
+  "version": "1.0.0",
+  "description": "Kristang wordlist. Released under GPLv3.",
+  "files": [
+    "mcm_MY.dic"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SyafiqHadzir/kristang-wordlist.git"
+  },
+  "keywords": [],
+  "author": "Syafiq Hadzir <syafiqhadzir@live.com.my> (https://syafiqhadzir.dev)",
+  "contributors": [
+    "Syafiq Hadzir <syafiqhadzir@live.com.my> (https://syafiqhadzir.dev)"
+  ],
+  "license": "GPL-3.0",
+  "homepage": "https://github.com/SyafiqHadzir/kristang-wordlist",
+  "scripts": {
+    "prepare": "husky install",
+    "sort": "ts-node scripts/sort-wordlist.ts",
+    "format": "prettier --write .",
+    "check-format": "prettier --check .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "lint-staged": {
+    "*.{ts,js,json,md,yml}": [
+      "prettier --write"
     ],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/SyafiqHadzir/kristang-wordlist.git"
-    },
-    "keywords": [],
-    "author": "Syafiq Hadzir <syafiqhadzir@live.com.my> (https://syafiqhadzir.dev)",
-    "contributors": [
-        "Syafiq Hadzir <syafiqhadzir@live.com.my> (https://syafiqhadzir.dev)"
-    ],
-    "license": "GPL-3.0",
-    "homepage": "https://github.com/SyafiqHadzir/kristang-wordlist"
+    "mcm_MY.dic": [
+      "ts-node scripts/sort-wordlist.ts",
+      "git add"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.3",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.7.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
 }

@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check Formatting
+        run: npm run check-format
+
+      - name: Verify Wordlist Sort
+        run: npm run sort
+        # If the sort script modifies the file, git diff will show changes.
+        # We want to fail if there are changes (meaning the committed file wasn't sorted).
+
+      - name: Check for changes
+        run: |
+          if [[ -n $(git status --porcelain) ]]; then
+            echo "Wordlist is not sorted or files are not formatted. Please run 'npm run sort' and 'npm run format'."
+            git status
+            git diff
+            exit 1
+          fi
