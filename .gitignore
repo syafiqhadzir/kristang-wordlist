@@ -1,23 +1,94 @@
-# Node
+# --- Dependency Directories ---
 node_modules/
-dist/
-coverage/
+jspm_packages/
 
-# Mac
+# --- Build & Output ---
+dist/
+build/
+out/
+bin-debug/
+obj/
+*.tsbuildinfo
+.turbo/
+
+# --- Testing & Coverage ---
+coverage/
+*.lcov
+.nyc_output/
+.vitest-cache/
+
+# --- IDEs & Editors ---
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/code-actions.json
+*.code-workspace
+
+# IntelliJ / WebStorm
+.idea/
+
+# Sublime / Atom
+*.sublime-project
+*.sublime-workspace
+.atom/
+
+# Vim
+*.swp
+*.swo
+*~
+Session.vim
+
+# --- OS Specific ---
+# macOS
 .DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+*.icloud
 
 # Windows
 Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+Desktop.ini
+$RECYCLE.BIN/
 
-# Editor
-.vscode/*
-!.vscode/extensions.json
-!.vscode/settings.json
-*.swp
-*.swo
+# Linux
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
 
-# Generated
+# --- Environment & Secrets ---
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env.bak
+
+# --- Logs ---
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --- Project Specific ---
+# Generated files
 src/generated/
 docs/.vitepress/dist
 docs/.vitepress/cache
+
+# Husky
+.husky/_
 
