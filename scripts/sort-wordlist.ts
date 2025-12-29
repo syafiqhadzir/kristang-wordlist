@@ -41,11 +41,10 @@ async function sortWordlist() {
 
     // Write JSON file
     if (!fs.existsSync(JSON_OUTPUT_DIR)) {
-        fs.mkdirSync(JSON_OUTPUT_DIR, { recursive: true });
+      fs.mkdirSync(JSON_OUTPUT_DIR, { recursive: true });
     }
     fs.writeFileSync(JSON_OUTPUT_PATH, JSON.stringify(uniqueWords, null, 2), 'utf-8');
     console.log(`Generated JSON wordlist at ${JSON_OUTPUT_PATH}`);
-
   } catch (error) {
     console.error('Error processing wordlist:', error);
     process.exit(1);

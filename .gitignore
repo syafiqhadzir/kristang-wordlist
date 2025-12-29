@@ -18,3 +18,6 @@ Thumbs.db
 
 # Generated
 src/generated/
+docs/.vitepress/dist
+docs/.vitepress/cache
+

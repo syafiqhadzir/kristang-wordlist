@@ -36,7 +36,7 @@ We use a strict sorting order for the wordlist to ensure consistency. Please run
 
 ## References
 
-* Pacific Linguistics Dictionary of Kristang
+- Pacific Linguistics Dictionary of Kristang
 
 ## License
 
@@ -48,6 +48,6 @@ See the [LICENSE](LICENSE) file for more details.
 
 ## Contact
 
-Syafiq Hadzir - [@syafiqhadzir_](https://twitter.com/syafiqhadzir_) - inquiry@syafiqhadzir.dev
+Syafiq Hadzir - [@syafiqhadzir\_](https://twitter.com/syafiqhadzir_) - inquiry@syafiqhadzir.dev
 
 Project Link: <https://github.com/SyafiqHadzir/kristang-wordlist>

@@ -9,6 +9,6 @@
     "resolveJsonModule": true,
     "outDir": "./dist"
   },
-  "include": ["scripts/**/*", "src/**/*"],
+  "include": ["scripts/**/*", "src/**/*", "tests/**/*", "bin/**/*"],
   "exclude": ["node_modules"]
 }

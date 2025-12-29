@@ -14,7 +14,7 @@ export function getWordlist(): string[] {
 export function hasWord(word: string, ignoreCase = false): boolean {
   if (ignoreCase) {
     const lowerWord = word.toLowerCase();
-    return words.some(w => w.toLowerCase() === lowerWord);
+    return words.some((w) => w.toLowerCase() === lowerWord);
   }
   return words.includes(word);
 }
