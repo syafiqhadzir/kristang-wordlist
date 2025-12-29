@@ -2,6 +2,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 const WORDLIST_PATH = path.join(__dirname, '../mcm_MY.dic');
+const JSON_OUTPUT_DIR = path.join(__dirname, '../src/generated');
+const JSON_OUTPUT_PATH = path.join(JSON_OUTPUT_DIR, 'words.json');
 
 async function sortWordlist() {
   try {
@@ -28,15 +30,22 @@ async function sortWordlist() {
     const newCount = uniqueWords.length;
     const header = `# ${newCount}`;
 
+    // Write DIC file
     const newContent = [header, ...uniqueWords].join('\n');
-
-    // Write back only if changed
     if (content.trim() !== newContent.trim()) {
       fs.writeFileSync(WORDLIST_PATH, newContent + '\n', 'utf-8');
-      console.log(`Wordlist sorted and updated. Count: ${newCount}`);
+      console.log(`Wordlist updated. Count: ${newCount}`);
     } else {
       console.log('Wordlist is already sorted.');
     }
+
+    // Write JSON file
+    if (!fs.existsSync(JSON_OUTPUT_DIR)) {
+        fs.mkdirSync(JSON_OUTPUT_DIR, { recursive: true });
+    }
+    fs.writeFileSync(JSON_OUTPUT_PATH, JSON.stringify(uniqueWords, null, 2), 'utf-8');
+    console.log(`Generated JSON wordlist at ${JSON_OUTPUT_PATH}`);
+
   } catch (error) {
     console.error('Error processing wordlist:', error);
     process.exit(1);
