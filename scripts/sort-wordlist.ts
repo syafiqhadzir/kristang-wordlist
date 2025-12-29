@@ -1,52 +1,58 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-const WORDLIST_PATH = path.join(__dirname, '../mcm_MY.dic');
-const JSON_OUTPUT_DIR = path.join(__dirname, '../src/generated');
+const WORDLIST_PATH = path.join(import.meta.dirname, '../mcm_MY.dic');
+const JSON_OUTPUT_DIR = path.join(import.meta.dirname, '../src/generated');
 const JSON_OUTPUT_PATH = path.join(JSON_OUTPUT_DIR, 'words.json');
 
-async function sortWordlist() {
+function sortWordlist() {
   try {
+    if (!fs.existsSync(WORDLIST_PATH)) {
+      throw new Error(`Wordlist not found at ${WORDLIST_PATH}`);
+    }
+
     const content = fs.readFileSync(WORDLIST_PATH, 'utf-8');
     const lines = content.split(/\r?\n/);
 
-    // The first line is the count, likely formatted like "# 2892" or just "2892"
-    // We'll extract comments if any, but standard hunspell usually is just the number.
-    // However, the file viewed had "# 2892".
-
-    // Filter out empty lines and the header line(s)
-    const words = lines
-      .slice(1) // Skip the first line which is the count
-      .map((line) => line.trim())
-      .filter((line) => line.length > 0 && !line.startsWith('#')); // Remove comments if any mid-file
-
-    // Deduplicate
-    const uniqueWords = Array.from(new Set(words));
-
-    // Sort
-    // Using simple localeCompare for now.
-    uniqueWords.sort((a, b) => a.localeCompare(b, ['pt', 'ms', 'en']));
-
-    const newCount = uniqueWords.length;
-    const header = `# ${newCount}`;
-
-    // Write DIC file
-    const newContent = [header, ...uniqueWords].join('\n');
-    if (content.trim() !== newContent.trim()) {
-      fs.writeFileSync(WORDLIST_PATH, newContent + '\n', 'utf-8');
-      console.log(`Wordlist updated. Count: ${newCount}`);
-    } else {
-      console.log('Wordlist is already sorted.');
+    if (lines.length === 0) {
+      console.warn('Wordlist is empty.');
+      return;
     }
 
-    // Write JSON file
+    // Standard Hunspell DIC: first line is word count.
+    // We filter out the header and comments.
+    const words = lines
+      .slice(1)
+      .map((line) => line.trim())
+      .filter((line) => line.length > 0 && !line.startsWith('#'));
+
+    const uniqueWords = [...new Set(words)];
+
+    // Sort with specific locale priority
+    uniqueWords.sort((a, b) => a.localeCompare(b, ['pt', 'ms', 'en'], { sensitivity: 'base' }));
+
+    const newCount = uniqueWords.length;
+    const header = `${newCount}`; // Pure number is standard for .dic
+
+    const newContent = [header, ...uniqueWords].join('\n') + '\n';
+
+    if (content !== newContent) {
+      fs.writeFileSync(WORDLIST_PATH, newContent, 'utf-8');
+      console.log(`✅ Wordlist sorted. Total words: ${newCount}`);
+    } else {
+      console.log('ℹ️ Wordlist is already sorted.');
+    }
+
+    // Ensure output directory exists before writing JSON
     if (!fs.existsSync(JSON_OUTPUT_DIR)) {
       fs.mkdirSync(JSON_OUTPUT_DIR, { recursive: true });
     }
+
     fs.writeFileSync(JSON_OUTPUT_PATH, JSON.stringify(uniqueWords, null, 2), 'utf-8');
-    console.log(`Generated JSON wordlist at ${JSON_OUTPUT_PATH}`);
+    console.log(`📦 JSON wordlist generated: ${JSON_OUTPUT_PATH}`);
   } catch (error) {
-    console.error('Error processing wordlist:', error);
+    const message = error instanceof Error ? error.message : String(error);
+    console.error(`❌ Error processing wordlist: ${message}`);
     process.exit(1);
   }
 }

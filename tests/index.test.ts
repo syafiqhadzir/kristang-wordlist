@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { getWordlist, hasWord } from '../src/index';
+import { getWordlist, hasWord } from '../src/index.js';
 
 describe('Kristang Wordlist', () => {
   it('should return an array of words', () => {

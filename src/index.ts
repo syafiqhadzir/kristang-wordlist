@@ -1,4 +1,4 @@
-import words from './generated/words.json';
+import words from './generated/words.json' with { type: 'json' };
 
 /**
  * Returns the entire Kristang wordlist as an array of strings.

@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 import { cac } from 'cac';
-import { getWordlist, hasWord } from '../src/index';
-// @ts-ignore
-import { version } from '../package.json';
+import { getWordlist } from '../src/index.js';
+
+import pkg from '../package.json' with { type: 'json' };
+const { version } = pkg;
 
 const cli = cac('kristang-wordlist');
 
-cli.command('search <term>', 'Search for words containing the term').action((term) => {
+cli.command('search <term>', 'Search for words containing the term').action((term: string) => {
   const list = getWordlist();
   const results = list.filter((word) => word.toLowerCase().includes(term.toLowerCase()));
 
@@ -16,25 +17,30 @@ cli.command('search <term>', 'Search for words containing the term').action((ter
   }
 
   console.log(`Found ${results.length} words:`);
-  results.forEach((word) => console.log(`- ${word}`));
+  results.forEach((word) => {
+    console.log(`- ${word}`);
+  });
 });
 
-cli.command('random [count]', 'Get random words').action((count = 1) => {
+cli.command('random [count]', 'Get random words').action((count?: number) => {
+  const limit = count ?? 1;
   const list = getWordlist();
-  const max = Math.min(count, list.length);
+  const max = Math.min(limit, list.length);
   const selected: string[] = [];
 
   // Simple random selection
   while (selected.length < max) {
     const randomIndex = Math.floor(Math.random() * list.length);
     const word = list[randomIndex];
-    if (!selected.includes(word)) {
+    if (word && !selected.includes(word)) {
       selected.push(word);
     }
   }
 
   console.log(`Random ${max} words:`);
-  selected.forEach((word) => console.log(`- ${word}`));
+  selected.forEach((word) => {
+    console.log(`- ${word}`);
+  });
 });
 
 cli.help();

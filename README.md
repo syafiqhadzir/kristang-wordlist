@@ -3,19 +3,53 @@
 ![CI](https://github.com/SyafiqHadzir/kristang-wordlist/workflows/CI/badge.svg)
 ![License](https://img.shields.io/github/license/SyafiqHadzir/kristang-wordlist)
 
-A comprehensive wordlist for Kristang (Malacca Creole Portuguese).
+A comprehensive wordlist for Kristang (Malacca Creole Portuguese), now modernised as a high-performance TypeScript library.
 
 ## Usage
 
-This wordlist is provided in [Hunspell](https://github.com/hunspell/hunspell) format. The main dictionary file is `mcm_MY.dic`.
+### As a Library
+
+Install via npm:
+
+```bash
+npm install kristang-wordlist
+```
+
+Use in your project (ESM or CJS):
+
+```typescript
+import { getWordlist, hasWord } from 'kristang-wordlist';
+
+const words = getWordlist();
+console.log(hasWord('aboh')); // true
+```
+
+### via CLI
+
+If installed globally or via `npx`:
+
+```bash
+# Search for words
+npx kristang-wordlist search bong
+
+# Get random words
+npx kristang-wordlist random 5
+```
+
+### Hunspell Format
+
+The raw dictionary is also provided for Hunspell-compatible applications:
+
+- Dictionary: `mcm_MY.dic`
+- Affix: `mcm_MY.aff`
 
 ## Development
 
-This repository uses modern tooling to maintain the quality and integrity of the wordlist.
+This repository uses modern, bleeding-edge tooling (ESM-only, TS 5.9+, ESLint 9 Flat Config).
 
 ### Prerequisites
 
-- Node.js (Lateat LTS recommended)
+- Node.js (Latest LTS recommended)
 - npm
 
 ### Setup
@@ -26,9 +60,12 @@ npm install
 
 ### Scripts
 
-- `npm run sort`: Sorts the wordlist, removes duplicates, and updates the word count.
+- `npm run sort`: Sorts the wordlist, removes duplicates, and updates the word count (using `tsx`).
+- `npm run lint`: Performs strict type-checked linting using ESLint 9 Flat Config.
 - `npm run check-format`: Checks if files are formatted correctly.
 - `npm run format`: Formats all files using Prettier.
+- `npm run build`: Compiles the library into dual ESM/CJS outputs.
+- `npm test`: Runs integration tests via Vitest.
 
 ### Formatting Rules
 
